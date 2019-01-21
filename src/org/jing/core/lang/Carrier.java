@@ -2,7 +2,6 @@ package org.jing.core.lang;
 
 import java.io.StringWriter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.dom4j.Document;
@@ -12,36 +11,58 @@ import org.dom4j.io.XMLWriter;
 import org.jing.core.util.CarrierUtil;
 import org.jing.core.util.GenericUtil;
 
+/**
+ * Description: A Special HashMap. <br>
+ *
+ * @author: lxd <br>
+ * @createDate 2019-01-10 17:11:02 <br>
+ */
 public class Carrier {
-    HashMap<String, Object> valueMap = null;
-    
-    Document document = null;
-    
+    /**
+     * Description: Value Map. <br>
+     */
+    private HashMap<String, Object> valueMap;
+
+    /**
+     * Description: Doucument for XML. <br>
+     */
+    private Document document = null;
+
+    /**
+     * Description: Constructor, it will initialize the value map with an empty HashMap. <br>
+     */
     public Carrier() {
         // TODO Auto-generated constructor stub
         valueMap = new HashMap<>();
     }
-    
+
+    /**
+     * Description: Throw exception if value map is empty. <br>
+     *
+     * @author: bks. <br>
+     * @throws JingException <br>
+     */
     private void checkFeasibility() throws JingException {
         CarrierUtil.checkFeasibility(valueMap);
     }
 
+    /**
+     * Description: Count how many entry with the same key. <br>
+     *
+     * @param key <br>
+     * @return <br>
+     * @throws JingException <br>
+     */
     public int getCount(String key) throws JingException {
         checkFeasibility();
-        if (valueMap.containsKey(key)) {
-            Object object = valueMap.get(key);
-            if (object instanceof List) {
-                return GenericUtil.countList((List<?>) object);
-            }
-            else {
-                return 1;
-            }
-        }
-        else {
-            return 0;
-        }
+        return CarrierUtil.getCount(valueMap, key);
     }
-    
+
+    /**
+     * Description: Setter. <br>
+     *
+     * @param valueMap <br>
+     */
     public void setValueMap(HashMap<String, Object> valueMap) {
         this.valueMap = valueMap;
     }
@@ -53,7 +74,7 @@ public class Carrier {
     public void setValueByKey(int seq, String key, Object value) throws JingException {
         CarrierUtil.setValueByKey(valueMap, key, value, seq);
     }
-    
+
     public void setValueByKey(String key, Object value) throws JingException {
         CarrierUtil.setValueByKey(valueMap, key, value, 0);
     }
@@ -94,7 +115,6 @@ public class Carrier {
         return GenericUtil.parseString(retObject);
     }
     
-    @SuppressWarnings("unchecked")
     public Carrier getCarrier(String key, int seq) throws JingException {
         Object temp = getValueByKey(seq, key, null);
         if (null == temp) {

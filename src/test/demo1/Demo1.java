@@ -7,13 +7,16 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.jing.core.lang.Configuration;
 import org.jing.core.lang.JingException;
 import org.jing.core.util.FileUtil;
+import sun.rmi.runtime.Log;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Properties;
 
 /**
  * Description: <br>
@@ -22,10 +25,14 @@ import java.io.Reader;
  * @createDate: 2019-01-09 <br>
  */
 public class Demo1 {
+    Logger logger = Logger.getLogger(Demo1.class);
+
     public Demo1() throws Exception {
         Initialization.getInstance();
-        System.out.println(FileUtil.readFile("E:\\W\\WorkSpace\\idea\\Jing\\web\\WEB-INF\\config\\log4j.properties"));
-        /*Reader reader = Resources.getResourceAsReader("mybatis-config.xml");
+        // System.out.println(FileUtil.readFile("E:\\W\\WorkSpace\\idea\\Jing\\web\\WEB-INF\\config\\log4j.properties"));
+
+        logger.info(Configuration.getInstance().getPropertyMap());
+        /*
         BufferedReader br = new BufferedReader(reader);
         System.out.println(br.readLine());*/
         /*SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);

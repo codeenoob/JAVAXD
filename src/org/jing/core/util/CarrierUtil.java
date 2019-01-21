@@ -1,6 +1,5 @@
 package org.jing.core.util;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -77,7 +76,7 @@ public class CarrierUtil {
         return retMap;
     }
     
-    public int getCount(HashMap<String, Object> valueMap, String key) throws JingException {
+    public static  int getCount(HashMap<String, Object> valueMap, String key) throws JingException {
         checkFeasibility(valueMap);
         if (valueMap.containsKey(key)) {
             Object object = valueMap.get(key);

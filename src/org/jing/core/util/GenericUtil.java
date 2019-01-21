@@ -13,11 +13,11 @@ public class GenericUtil {
      * shouldn't be empty. <br>
      */
     public static final int COMPARE_STRING_NOT_NULL = 2;
+
     /**
      * Description: If String Is Empty, Get Default String <br>
      * 
      * @author bks <br>
-     * @taskId <br>
      * @param string <br>
      * @param defaultString <br>
      * @return <br>
@@ -35,7 +35,6 @@ public class GenericUtil {
      * Description: If String Is Empty, Get Empty String <br>
      * 
      * @author bks <br>
-     * @taskId <br>
      * @param string <br>
      * @return <br>
      */
@@ -52,7 +51,6 @@ public class GenericUtil {
      * Description: If String Is Not Empty, Get Default String. <br> 
      *  
      * @author bks <br>
-     * @taskId <br>
      * @param string <br>
      * @param defaultString <br>
      * @return <br>
@@ -71,7 +69,6 @@ public class GenericUtil {
      * If String Is Empty, Get EmptyString. <br>
      *  
      * @author bks <br>
-     * @taskId <br>
      * @param string <br>
      * @param defaultString <br>
      * @param emptyString <br>
@@ -93,7 +90,6 @@ public class GenericUtil {
      * It may return a null String, plz be careful. <br>
      * 
      * @author bks <br>
-     * @taskId <br>
      * @param map <br>
      * @param key <br>
      * @param defaultString <br>
@@ -134,7 +130,6 @@ public class GenericUtil {
      * The return HashMap won't be null, at least return a empty HashMap. <br>
      *  
      * @author bks <br>
-     * @taskId <br>
      * @param <A> <br>
      * @param <B> <br>
      * @param key <br>
@@ -195,7 +190,6 @@ public class GenericUtil {
      * It may return a null String, plz be careful. <br>
      * 
      * @author bks <br>
-     * @taskId <br>
      * @param list <br>
      * @param key <br>
      * @return <br>
@@ -350,7 +344,6 @@ public class GenericUtil {
         }
     }
 
-    @SuppressWarnings("unchecked")
     public static HashMap<String, String> clone(HashMap<String, String> hashMap) throws JingException {
         throwNullException(hashMap, "JING-UTIL-0001", "Failed To Clone A Null HashMap");
         return (HashMap<String, String>) hashMap.clone();
