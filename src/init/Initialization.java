@@ -23,12 +23,7 @@ public class Initialization {
     private Initialization() {
         try {
             // PropertyConfigurator.configure(Resources.getResourceAsProperties("org\\jing\\cfg\\log4j.properties"));
-            PropertyConfigurator.configure(FileUtil.readProperties(
-                new StringBuilder("org").append(Const.SYSTEM_FILE_SEPERATOR)
-                    .append("jing").append(Const.SYSTEM_FILE_SEPERATOR)
-                    .append("cfg").append(Const.SYSTEM_FILE_SEPERATOR)
-                    .append(Configuration.getInstance().getProperty("Logger")).toString(),
-                false));
+            PropertyConfigurator.configure(FileUtil.readProperties(Configuration.getInstance().getProperty("Logger"), false));
         }
         catch (Exception e) {
             e.printStackTrace();

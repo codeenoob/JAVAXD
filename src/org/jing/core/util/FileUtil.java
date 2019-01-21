@@ -2,6 +2,7 @@ package org.jing.core.util;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.log4j.Logger;
+import org.jing.core.lang.Const;
 import org.jing.core.lang.ExceptionHandler;
 import org.jing.core.lang.JingException;
 
@@ -19,6 +20,10 @@ public class FileUtil {
      * logger. <br>
      */
     private static volatile  Logger logger = null;
+
+    private static ClassLoader defaultClassLoader;
+
+    private static ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
 
     public static boolean log(boolean flag) {
         if (flag) {
@@ -62,7 +67,7 @@ public class FileUtil {
             retString = stbr.toString();
         }
         catch (Exception e) {
-            ExceptionHandler.publish("UTIL-FILE-00000",
+            ExceptionHandler.publish("UTIL-FILE-00003",
                 new StringBuilder("Failed To Read File [filePath: ").append(filePath).append("]").toString(), e);
         }
         return retString;
@@ -83,7 +88,7 @@ public class FileUtil {
      * @param filePath <br>
      * @return java.lang.String <br>
      */
-    public static String readResource(String filePath, boolean log) throws JingException {
+    public static String readProperties2String(String filePath, boolean log) throws JingException {
         if (log(log)) {
             logger.info(new StringBuilder("Try To Read File [filePath: ").append(filePath).append("]").toString());
         }
@@ -105,8 +110,8 @@ public class FileUtil {
         return stbr.toString();
     }
 
-    public static String readResource(String filePath) throws JingException {
-        return  readResource(filePath, true);
+    public static String readProperties2String(String filePath) throws JingException {
+        return  readProperties2String(filePath, true);
     }
 
     public static Properties readProperties(String filePath, boolean log) throws JingException {
@@ -125,5 +130,52 @@ public class FileUtil {
 
     public static Properties readProperties(String filePath) throws JingException {
         return readProperties(filePath, true);
+    }
+
+    public static String readResource(String filePath, boolean log) throws JingException {
+        if (log(log)) {
+            logger.info(new StringBuilder("Try To Read File [filePath: ").append(filePath).append("]").toString());
+        }
+        try {
+            ClassLoader classLoader[] = new ClassLoader[] {
+                null,
+                defaultClassLoader,
+                Thread.currentThread().getContextClassLoader(),
+                FileUtil.class.getClassLoader(),
+                systemClassLoader
+            };
+            int size = classLoader.length;
+            for (int i$ = 0; i$ < size; i$++) {
+                ClassLoader classLoader$ = classLoader[i$];
+                InputStream is = null;
+                if (null != classLoader$) {
+                    is = classLoader$.getResourceAsStream(filePath);
+                    if (null == is) {
+                        is = classLoader$.getResourceAsStream(
+                            new StringBuilder(Const.SYSTEM_FILE_SEPERATOR).append(filePath).toString());
+                    }
+                    if (null != is) {
+                        StringBuilder stbr$ = new StringBuilder();
+                        int maxLength$ = is.available();
+                        int size$ = maxLength$ / Const.SYSTEM_MAX_BYTES_SIZE + 1;
+                        for (int j$ = 0; j$ < size$; j$++) {
+                            int off$ = j$ * Const.SYSTEM_MAX_BYTES_SIZE;
+                            int len$ = (j$ + 1) * Const.SYSTEM_MAX_BYTES_SIZE > maxLength$
+                                ? maxLength$
+                                : Const.SYSTEM_MAX_BYTES_SIZE;
+                            byte[] bytes$ = new byte[len$];
+                            is.read(bytes$, off$, len$);
+                            stbr$.append(new String(bytes$));
+                        }
+                        return stbr$.toString();
+                    }
+                }
+            }
+        }
+        catch (Exception e) {
+            ExceptionHandler.publish("UTIL-FILE-00004",
+                new StringBuilder("Failed To Read Properties [filePath: ").append(filePath).append("]").toString(), e);
+        }
+        return null;
     }
 }
