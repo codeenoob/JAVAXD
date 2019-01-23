@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.StringReader;
+import java.util.HashSet;
 
 /**
  * Description: <br>
@@ -21,6 +22,10 @@ import java.io.StringReader;
  */
 public class SessionFactory {
     private static volatile SessionFactory ourInstance = null;
+
+    private static ThreadLocal<SqlSession> threadSession = new ThreadLocal<>();
+
+    private static final HashSet<Class<?>> mapperSet = new HashSet<>();
 
     private SqlSessionFactory sqlSessionFactory;
 
@@ -45,7 +50,18 @@ public class SessionFactory {
         }
     }
 
-    public SqlSession newSession() {
-        return sqlSessionFactory.openSession();
+    public void registerMapper(Class<?> mapper) {
+        if (!sqlSessionFactory.getConfiguration().hasMapper(mapper)) {
+            sqlSessionFactory.getConfiguration().addMapper(mapper);
+        }
+    }
+
+    public SqlSession getSession() {
+        SqlSession session = threadSession.get();
+        if (null == session) {
+            session = sqlSessionFactory.openSession();
+            threadSession.set(session);
+        }
+        return session;
     }
 }

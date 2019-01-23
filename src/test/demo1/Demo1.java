@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.jing.core.db.MapperFactory;
 import org.jing.core.db.SessionFactory;
 import org.jing.core.lang.Configuration;
 import org.jing.core.lang.JingException;
@@ -36,8 +37,7 @@ public class Demo1 {
         logger.info(Configuration.getInstance().getLocalPropertyMap());
         logger.info(Configuration.getInstance().getPropertyMap());
         logger.info("==========[Split]=============");
-        SqlSession session = SessionFactory.getInstance().newSession();
-        UserMapper mapper = session.getMapper(UserMapper.class);
+        UserMapper mapper = MapperFactory.getMapper(UserMapper.class);
         logger.info(mapper.selectTry());
         /*
         BufferedReader br = new BufferedReader(reader);
