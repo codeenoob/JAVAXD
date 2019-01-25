@@ -11,7 +11,7 @@ public interface UserMapper {
     // @Insert("INSERT INTO TB_USER (ID, NAME, SEX, AGE) VALUES (#{id}, #{name}, #{sex}, #{age})")
     // int saveUser(UserDto user);
 
-    @Select("Select * FROM BM_USER")
+    @Select("SELECT * FROM BM_USER FOR UPDATE NOWAIT")
     List<HashMap<String, String>> selectTry();
 
     @Insert("INSERT INTO BM_USER (ID, NAME, ACCOUNT, PASSWORD, ROLE, SEX, CRT_DATE, LAST_LOGIN_DATE, "

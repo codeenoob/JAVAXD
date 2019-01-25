@@ -8,11 +8,9 @@ import org.jing.core.lang.ExceptionHandler;
 import org.jing.core.lang.JingException;
 import org.jing.core.util.FileUtil;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.StringReader;
-import java.util.HashSet;
+import java.util.EmptyStackException;
+import java.util.Stack;
 
 /**
  * Description: <br>
@@ -23,9 +21,7 @@ import java.util.HashSet;
 public class SessionFactory {
     private static volatile SessionFactory ourInstance = null;
 
-    private static ThreadLocal<SqlSession> threadSession = new ThreadLocal<>();
-
-    private static final HashSet<Class<?>> mapperSet = new HashSet<>();
+    private static ThreadLocal<Stack<SqlSession>> threadSessionStack = new ThreadLocal<>();
 
     private SqlSessionFactory sqlSessionFactory;
 
@@ -57,11 +53,70 @@ public class SessionFactory {
     }
 
     public SqlSession getSession() {
-        SqlSession session = threadSession.get();
-        if (null == session) {
-            session = sqlSessionFactory.openSession();
-            threadSession.set(session);
+        return getSession(false);
+    }
+
+    public SqlSession getSession(boolean autoCommit) {
+        Stack<SqlSession> stack = threadSessionStack.get();
+        if (null == stack) {
+            stack = new Stack<>();
+            threadSessionStack.set(stack);
+            SqlSession session = newSession(autoCommit);
+            return session;
         }
+        return stack.peek();
+    }
+
+    public SqlSession newSession() {
+        return newSession(false);
+    }
+
+    public SqlSession newSession(boolean autoCommit) {
+        Stack<SqlSession> stack = threadSessionStack.get();
+        if (null == stack) {
+            stack = new Stack<>();
+            threadSessionStack.set(stack);
+        }
+        SqlSession session = sqlSessionFactory.openSession(autoCommit);
+        stack.push(session);
         return session;
+    }
+
+    public void closeSession(SqlSession session) throws JingException {
+        Stack<SqlSession> stack = threadSessionStack.get();
+        if (null == stack) {
+            return;
+        }
+        SqlSession session$ = stack.pop();
+        int flag$ = 0;
+        while (flag$ < 2) {
+            try {
+                session$.commit();
+                session$.close();
+            }
+            catch (Throwable t) {
+                ExceptionHandler.publish("SESSION-00002", "Failed to close session", t);
+            }
+            try {
+                if (0 == flag$) {
+                    session$ = stack.pop();
+                }
+            }
+            catch (EmptyStackException e) {
+                if (null != session) {
+                    ExceptionHandler.publish("SESSION-00001", "Cannot match the session when try to close it", e);
+                }
+                else {
+                    return;
+                }
+            }
+            if (session == session$ || flag$ != 0) {
+                flag$++;
+            }
+        }
+    }
+
+    public void closeSession() throws JingException {
+        closeSession(null);
     }
 }

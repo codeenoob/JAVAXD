@@ -30,19 +30,12 @@ public class MapperInvocation implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        logger.info("MapperInvocation start..." + target.getClass() + "->>-" + method.getName());
         try {
             return method.invoke(target, args);
         }
         catch (Throwable t) {
-            try {
-                ExceptionHandler.publish("JDBC-0000", "Unexpected error occurred.", t);
-            }
-            catch (Exception e) {
-                logger.error(StringUtil.getErrorInf(t));
-            }
+            ExceptionHandler.publish("JDBC-0000", "Unexpected error occurred.", t);
         }
-        logger.info("MapperInvocation end..." + target.getClass() + "->>-" + method.getName());
         return null;
     }
 }
