@@ -1,10 +1,7 @@
 package init;
 
-import org.apache.ibatis.io.Resources;
 import org.apache.log4j.PropertyConfigurator;
 import org.jing.core.lang.Configuration;
-import org.jing.core.lang.Const;
-import org.jing.core.lang.JingException;
 import org.jing.core.util.FileUtil;
 
 /**

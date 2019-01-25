@@ -1,15 +1,6 @@
 package test.demo1;
 
-import org.apache.log4j.PropertyConfigurator;
-import org.jing.core.lang.Configuration;
-import org.jing.core.lang.Const;
-import org.jing.core.lang.JingException;
 import org.jing.core.util.FileUtil;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.InputStream;
 
 /**
  * Description: <br>

@@ -1,25 +1,11 @@
 package test.demo1;
 
 import init.Initialization;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.jing.core.db.MapperFactory;
-import org.jing.core.db.SessionFactory;
 import org.jing.core.lang.Configuration;
-import org.jing.core.lang.JingException;
-import org.jing.core.util.FileUtil;
-import org.jing.web.mapper.UserMapper;
-import sun.rmi.runtime.Log;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.util.Properties;
+import org.jing.web.db.bm.user.dto.UserDto;
+import org.jing.web.db.bm.user.mapper.UserMapper;
 
 /**
  * Description: <br>
@@ -39,6 +25,8 @@ public class Demo1 {
         logger.info("==========[Split]=============");
         UserMapper mapper = MapperFactory.getMapper(UserMapper.class);
         mapper.selectTry();
+        UserDto userDto = new UserDto();
+        // userDto.setId();
         logger.info(mapper.selectTry());
         /*
         BufferedReader br = new BufferedReader(reader);

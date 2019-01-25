@@ -2,6 +2,8 @@ package org.jing.core.db;
 
 import org.apache.log4j.Logger;
 import org.jing.core.lang.ExceptionHandler;
+import org.jing.core.util.StringUtil;
+import org.jing.core.util.ToUtil;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -30,17 +32,14 @@ public class MapperInvocation implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         logger.info("MapperInvocation start..." + target.getClass() + "->>-" + method.getName());
         try {
-            method.invoke(target, args);
+            return method.invoke(target, args);
         }
         catch (Throwable t) {
             try {
                 ExceptionHandler.publish("JDBC-0000", "Unexpected error occurred.", t);
             }
             catch (Exception e) {
-                StringWriter sw = new StringWriter();
-                PrintWriter pw = new PrintWriter(sw);
-                e.printStackTrace(pw);
-                logger.error(sw.toString());
+                logger.error(StringUtil.getErrorInf(t));
             }
         }
         logger.info("MapperInvocation end..." + target.getClass() + "->>-" + method.getName());

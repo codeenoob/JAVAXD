@@ -1,0 +1,24 @@
+/**
+ * Description: <br>
+ *
+ * @author: bks <br>
+ * @createDate: 2019-01-25 <br>
+ */
+package org.jing.web.db.bm.user;
+/**
+ * Description: BM_USER.
+ CREATE TABLE BM_USER (
+ ID NUMBER(6),
+ NAME VARCHAR2(40) UNIQUE,
+ ACCOUNT VARCHAR2(20) UNIQUE,
+ PASSWORD VARCHAR2(20),
+ ROLE NUMBER(6) NOT NULL,
+ SEX VARCHAR2(3) NOT NULL,
+ CRT_DATE DATE NOT NULL,
+ LAST_LOGIN_DATE DATE,
+ LAST_LOGOUT_DATE DATE,
+ LAST_OPER_DATE DATE,
+ STATE VARCHAR2(1) NOT NULL,
+ PRIMARY KEY(ID)
+ )
+ */
