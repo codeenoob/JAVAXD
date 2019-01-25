@@ -12,7 +12,7 @@ public interface UserMapper {
     // @Insert("INSERT INTO TB_USER (ID, NAME, SEX, AGE) VALUES (#{id}, #{name}, #{sex}, #{age})")
     // int saveUser(User user);
 
-    @Select("Select * FROM TB_USER")
+    @Select("Select * FROM TB_USERS")
     List<HashMap<String, String>> selectTry();
 
     @Update("UPDATE TB_USER T SET T.SEX = #{sex} WHERE T.ID = #{id}")

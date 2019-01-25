@@ -38,6 +38,7 @@ public class Demo1 {
         logger.info(Configuration.getInstance().getPropertyMap());
         logger.info("==========[Split]=============");
         UserMapper mapper = MapperFactory.getMapper(UserMapper.class);
+        mapper.selectTry();
         logger.info(mapper.selectTry());
         /*
         BufferedReader br = new BufferedReader(reader);

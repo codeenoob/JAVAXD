@@ -1,9 +1,12 @@
 package org.jing.core.util;
 
+import org.apache.log4j.Logger;
 import org.jing.core.lang.JingException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Objects;
 
 /**
@@ -13,6 +16,8 @@ import java.util.Objects;
  * @createDate: 2019-01-17 <br>
  */
 public class StringUtil {
+    private static Logger logger = Logger.getLogger(StringUtil.class);
+
     public final static int PAD_MODEL_LEFT = 0;
 
     public final static int PAD_MODEL_RIGHT = 1;
@@ -168,5 +173,19 @@ public class StringUtil {
                 return string;
             }
         }
+    }
+
+    public static String getErrorStack(Throwable t) {
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        t.printStackTrace(pw);
+        try {
+            pw.close();
+            sw.close();
+        }
+        catch (Exception e) {
+            logger.error(e);
+        }
+        return sw.toString();
     }
 }

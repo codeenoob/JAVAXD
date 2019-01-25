@@ -15,7 +15,10 @@ public class MapperFactory {
             SessionFactory.getInstance().registerMapper(mapper);
             session = SessionFactory.getInstance().getSession();
         }
-        return session.getMapper(mapper);
+        MapperInvocation pxy = new MapperInvocation();
+        T itf = session.getMapper(mapper);
+        T itf$ = (T) pxy.bind(itf);
+        return itf$;
     }
 
     public static <T> T getMapper(Class<T> mapper) throws JingException {
