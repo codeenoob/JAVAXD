@@ -11,8 +11,8 @@ import org.jing.core.db.MapperFactory;
 import org.jing.core.db.SessionFactory;
 import org.jing.core.lang.Configuration;
 import org.jing.core.lang.JingException;
-import org.jing.core.mapper.UserMapper;
 import org.jing.core.util.FileUtil;
+import org.jing.web.mapper.UserMapper;
 import sun.rmi.runtime.Log;
 
 import java.io.BufferedReader;

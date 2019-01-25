@@ -1,6 +1,5 @@
-package org.jing.core.mapper;
+package org.jing.web.mapper;
 
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
