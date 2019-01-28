@@ -22,12 +22,10 @@ public class Demo1 {
         Initialization.getInstance();
         // System.out.println(FileUtil.readFile("E:\\W\\WorkSpace\\idea\\Jing\\web\\WEB-INF\\config\\log4j.properties"));
 
-        logger.info(Configuration.getInstance().getLocalPropertyMap());
-        logger.info(Configuration.getInstance().getPropertyMap());
         logger.info("==========[Split]=============");
         UserMapper mapper = MapperFactory.getMapper(UserMapper.class);
         mapper.selectTry();
-        SessionFactory.getInstance().closeSession();
+        // SessionFactory.getInstance().closeSession();
         SqlSession session = SessionFactory.getInstance().newSession();
         UserMapper mapper$ = MapperFactory.getMapper(session, UserMapper.class);
         mapper$.selectTry();

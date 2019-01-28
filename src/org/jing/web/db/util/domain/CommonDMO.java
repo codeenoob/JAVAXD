@@ -8,13 +8,14 @@ import org.apache.ibatis.jdbc.SQL;
  * @author: bks <br>
  * @createDate: 2019-01-25 <br>
  */
-public class SeqDMO {
+public class CommonDMO {
     @Deprecated
     public String qryCurrentValueByName(String name) {
         StringBuilder stbr = new StringBuilder("SELECT ").append(name).append(".CURRVAL FROM DUAL");
         return stbr.toString();
     }
 
+    @Deprecated
     public String qryNextValueByName(String name) {
         StringBuilder stbr = new StringBuilder("SELECT ").append(name).append(".NEXTVAL FROM DUAL");
         return stbr.toString();

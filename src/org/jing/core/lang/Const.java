@@ -7,6 +7,10 @@ package org.jing.core.lang;
  * @createDate: 2019-01-25 <br>
  */
 public class Const {
+    public static final String STATE_ACTIVE = "A";
+
+    public static final String STATE_INACTIVE = "X";
+
     public final static String CARRIER_ROOT_NODE = "jing";
 
     public final static String SYSTEM_FILE_SEPERATOR = Configuration.getInstance().getLocalProperty("file.separator");

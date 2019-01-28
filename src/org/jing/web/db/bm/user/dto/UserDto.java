@@ -7,7 +7,7 @@ package org.jing.web.db.bm.user.dto;
  * @createDate: 2019-01-25 <br>
  */
 public class UserDto {
-    private int id;
+    private int id = -2;
 
     private String name;
 

@@ -1,11 +1,9 @@
 package org.jing.web.db.util.demo;
 
 import init.Initialization;
-import org.jing.core.db.MapperFactory;
-import org.jing.web.db.util.api.SeqUtil;
-import org.jing.web.db.util.mapper.SeqMapper;
-
-import java.lang.Exception;
+import org.apache.log4j.Logger;
+import org.jing.core.util.DateUtil;
+import org.jing.web.db.util.api.CommonUtil;
 
 /**
  * Description: <br>
@@ -14,9 +12,12 @@ import java.lang.Exception;
  * @createDate: 2019-01-25 <br>
  */
 public class SeqDemo {
+    static Logger logger = Logger.getLogger(SeqDemo.class);
+
     private SeqDemo() throws Exception {
         Initialization.getInstance();
-        System.out.println(SeqUtil.qryNextValueByName("S_USER_ID"));
+        System.out.println(CommonUtil.qrySeqNextValueByName("S_USER_ID"));
+        logger.info(CommonUtil.qryDBDate(DateUtil.DB_DATE_TIME));
     }
 
     public static void main(String[] args) throws Exception {
