@@ -6,8 +6,11 @@ import org.apache.log4j.Logger;
 import org.jing.core.db.MapperFactory;
 import org.jing.core.db.SessionFactory;
 import org.jing.core.lang.Configuration;
+import org.jing.web.db.bm.user.api.User;
 import org.jing.web.db.bm.user.dto.UserDto;
 import org.jing.web.db.bm.user.mapper.UserMapper;
+
+import java.util.List;
 
 /**
  * Description: <br>
@@ -24,19 +27,9 @@ public class Demo1 {
 
         logger.info("==========[Split]=============");
         UserMapper mapper = MapperFactory.getMapper(UserMapper.class);
-        mapper.selectTry();
-        // SessionFactory.getInstance().closeSession();
-        SqlSession session = SessionFactory.getInstance().newSession();
-        UserMapper mapper$ = MapperFactory.getMapper(session, UserMapper.class);
-        mapper$.selectTry();
-        System.out.println("???");
-        mapper$.selectTry();
-        System.out.println("??????");
-        // UserDto userDto = new UserDto();
-        // userDto.setId();
-        logger.info(mapper$.selectTry());
-        System.out.println("?????????");
-
+        // List<UserDto> list = mapper.selectTry("A");
+        // System.out.println(list);
+        mapper.saveTemp("123", "2018-01-01 21:42:43");
         SessionFactory.getInstance().closeSession();
         /*
         BufferedReader br = new BufferedReader(reader);

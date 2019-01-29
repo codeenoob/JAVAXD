@@ -6,6 +6,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<settings>
 		<setting name="logImpl" value="LOG4J"/>
 	</settings>
+	<!--<typeHandlers>
+		<typeHandler handler="org.jing.core.db.SqlDateTime2JavaStringTypeHandler" />
+	</typeHandlers>-->
 	<environments default="oracle">
 		<environment id="oracle">
 			<transactionManager type="JDBC" />

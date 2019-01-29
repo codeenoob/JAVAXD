@@ -20,9 +20,9 @@ public class UserDemo {
     private UserDemo() throws Exception {
         Initialization.getInstance();
         UserDto user = new UserDto();
-        user.setAccount("ADMINS");
+        user.setAccount("ADMINSsS");
         user.setPassword("");
-        user.setName("admins");
+        user.setName("adminssS");
         user.setRole(-1);
         user.setSex(-1);
         User.api().saveUser(user);
