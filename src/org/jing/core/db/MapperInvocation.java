@@ -2,11 +2,7 @@ package org.jing.core.db;
 
 import org.apache.log4j.Logger;
 import org.jing.core.lang.ExceptionHandler;
-import org.jing.core.util.StringUtil;
-import org.jing.core.util.ToUtil;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -30,6 +26,7 @@ public class MapperInvocation implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        logger.info(method.getName());
         try {
             return method.invoke(target, args);
         }

@@ -1,10 +1,12 @@
 package org.jing.core.util;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.jing.core.lang.ExceptionHandler;
 import org.jing.core.lang.JingException;
 
 public class GenericUtil {
@@ -358,6 +360,21 @@ public class GenericUtil {
             return ((Class<?>) object.getClass().getField("TYPE").get(null)).isPrimitive();
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    public static void setByForce(Object object, String name, Object value) throws JingException {
+        if (null == object) {
+            return;
+        }
+        try {
+            Field field = object.getClass().getDeclaredField(name);
+            field.setAccessible(true);
+            field.set(object, value);
+        }
+        catch (Exception e) {
+            ExceptionHandler.publish("UTIL-00000",
+                new StringBuilder("Failed to set the value [").append(name).append("] of ").append(object.getClass().getName()).toString());
         }
     }
 }

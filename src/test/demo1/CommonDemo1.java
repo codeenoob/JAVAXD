@@ -1,6 +1,14 @@
 package test.demo1;
 
-import org.jing.core.util.FileUtil;
+import init.Initialization;
+import org.apache.log4j.Appender;
+import org.apache.log4j.Logger;
+import org.apache.log4j.spi.Filter;
+import org.apache.log4j.spi.LoggingEvent;
+import org.jing.core.logging.Log4jFilter;
+import org.jing.core.util.GenericUtil;
+
+import java.util.Enumeration;
 
 /**
  * Description: <br>
@@ -9,28 +17,11 @@ import org.jing.core.util.FileUtil;
  * @createDate: 2019-01-21 <br>
  */
 public class CommonDemo1 {
+    private transient int x = 1;
     private CommonDemo1() throws Exception {
-        String resource = "org/jing/cfg/mybatis-config.xml";
-        System.out.println(FileUtil.readResource(resource, false));
-        /*System.out.println(new File(resource).exists());
-        ClassLoader classLoader[] = new ClassLoader[] { null, null, Thread.currentThread().getContextClassLoader(), this.getClass().getClassLoader(), ClassLoader.getSystemClassLoader()};
-        int size = classLoader.length;
-        for (int i = 0; i < size; i++) {
-            ClassLoader cl = classLoader[i];
-            InputStream returnValue = null;
-            if (null != cl) {
-                returnValue = cl.getResourceAsStream(resource);
-                if (null == returnValue) {
-                    returnValue = cl.getResourceAsStream("/" + resource);
-                }
-            }
-            System.out.println(i + "==" + returnValue);
-            byte b[] = new byte[10000];
-            if (null != returnValue) {
-                returnValue.read(b);
-                System.out.println(new String(b));
-            }
-        }*/
+        Logger logger = Logger.getLogger(CommonDemo1.class);
+        x = 2;
+        GenericUtil.setByForce(this, "x", 2);
     }
     public static void main(String[] args) throws Exception {
         new CommonDemo1();

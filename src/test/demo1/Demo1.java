@@ -23,7 +23,7 @@ public class Demo1 {
 
     public Demo1() throws Exception {
         Initialization.getInstance();
-        // System.out.println(FileUtil.readFile("E:\\W\\WorkSpace\\idea\\Jing\\web\\WEB-INF\\config\\log4j.properties"));
+        // System.out.println(FileUtil.readFile("E:\\W\\WorkSpace\\idea\\Jing\\web\\WEB-INF\\config\\log4j.properties.b"));
 
         logger.info("==========[Split]=============");
         UserMapper mapper = MapperFactory.getMapper(UserMapper.class);
