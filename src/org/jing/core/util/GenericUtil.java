@@ -377,4 +377,5 @@ public class GenericUtil {
                 new StringBuilder("Failed to set the value [").append(name).append("] of ").append(object.getClass().getName()).toString());
         }
     }
+
 }
