@@ -2,6 +2,7 @@ package org.jing.core.util;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -364,9 +365,6 @@ public class GenericUtil {
     }
 
     public static void setByForce(Object object, String name, Object value) throws JingException {
-        if (null == object) {
-            return;
-        }
         try {
             Field field = object.getClass().getDeclaredField(name);
             field.setAccessible(true);
@@ -378,4 +376,32 @@ public class GenericUtil {
         }
     }
 
+    public static Object getByForce(Object object, String name) throws JingException {
+        try {
+            Field field = object.getClass().getDeclaredField(name);
+            field.setAccessible(true);
+            return field.get(object);
+        }
+        catch (Exception e) {
+            ExceptionHandler.publish("UTIL-00001",
+                new StringBuilder("Failed to get the value [").append(name).append("] of ").append(object.getClass().getName()).toString());
+        }
+        return null;
+    }
+
+
+    public static void batchSetByForce(Object object, String[] names, Object[] values) throws JingException {
+        try {
+            int count = names.length;
+            for (int i$ = 0; i$ < count; i$++) {
+                Field field$ = object.getClass().getDeclaredField(names[i$]);
+                field$.setAccessible(true);
+                field$.set(object, values[i$]);
+            }
+        }
+        catch (Exception e) {
+            ExceptionHandler.publish("UTIL-00000",
+                new StringBuilder("Failed to set the value [").append(Arrays.toString(names)).append("] of ").append(object.getClass().getName()).toString());
+        }
+    }
 }

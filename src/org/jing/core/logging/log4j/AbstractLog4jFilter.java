@@ -1,4 +1,4 @@
-package org.jing.core.logging;
+package org.jing.core.logging.log4j;
 
 import org.apache.log4j.spi.LoggingEvent;
 import org.jing.core.lang.JingException;
