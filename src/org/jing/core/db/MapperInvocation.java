@@ -1,6 +1,5 @@
 package org.jing.core.db;
 
-import org.apache.log4j.Logger;
 import org.jing.core.lang.ExceptionHandler;
 
 import java.lang.reflect.InvocationHandler;
@@ -9,24 +8,23 @@ import java.lang.reflect.Proxy;
 
 /**
  * Description: <br>
+ *     映射关系拦截器. <br>
+ *     方便未来的对mapper的管理. <br>
  *
  * @author: bks <br>
  * @createDate: 2019-01-24 <br>
  */
+@SuppressWarnings("WeakerAccess")
 public class MapperInvocation implements InvocationHandler {
-    private static Logger logger = Logger.getLogger(MapperFactory.class);
-
     private Object target;
 
     public Object bind(Object object) {
         target = object;
-        Object warpedItf = Proxy.newProxyInstance(target.getClass().getClassLoader(), object.getClass().getInterfaces(), this);
-        return warpedItf;
+        return Proxy.newProxyInstance(target.getClass().getClassLoader(), object.getClass().getInterfaces(), this);
     }
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        logger.info(method.getName());
         try {
             return method.invoke(target, args);
         }

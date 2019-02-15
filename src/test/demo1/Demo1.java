@@ -22,7 +22,7 @@ public class Demo1 {
     Logger logger = Logger.getLogger(Demo1.class);
 
     public Demo1() throws Exception {
-        Initialization.getInstance();
+        // Initialization.getInstance();
         // System.out.println(FileUtil.readFile("E:\\W\\WorkSpace\\idea\\Jing\\web\\WEB-INF\\config\\log4j.properties.b"));
 
         logger.info("==========[Split]=============");

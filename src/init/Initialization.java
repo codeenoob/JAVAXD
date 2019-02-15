@@ -6,6 +6,7 @@ import org.jing.core.logging.Log4jInit;
 
 /**
  * Description: <br>
+ *     用来进行统一初始化. <br>
  *
  * @author: bks <br>
  * @createDate: 2019-01-09 <br>
@@ -26,6 +27,7 @@ public class Initialization {
 
     private Initialization() {
         try {
+            // 1. 加载日志框架.
             initLogger();
         }
         catch (Exception e) {
@@ -34,7 +36,7 @@ public class Initialization {
     }
 
     private void initLogger() throws JingException {
-        // 2. 加载日志框架
+        // 目前暂时只加载Log4j框架.
         InitFactory.register(Log4jInit.class);
     }
 }

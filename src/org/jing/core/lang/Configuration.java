@@ -1,5 +1,6 @@
 package org.jing.core.lang;
 
+import init.Initialization;
 import org.apache.ibatis.io.Resources;
 import org.jing.core.util.StringUtil;
 import org.jing.core.util.ToUtil;
@@ -14,6 +15,7 @@ import java.util.Properties;
  * @author: bks <br>
  * @createDate: 2019-01-09 <br>
  */
+@SuppressWarnings({ "WeakerAccess", "unused" })
 public class Configuration {
     private static volatile Configuration ourInstance = null;
 
@@ -26,6 +28,7 @@ public class Configuration {
             synchronized (Configuration.class) {
                 if (null == ourInstance) {
                     ourInstance = new Configuration();
+                    Initialization.getInstance();
                 }
             }
         }
@@ -62,10 +65,5 @@ public class Configuration {
 
     public HashMap<Object, Object> getLocalPropertyMap() {
         return ToUtil.properties2HashMap(localProperties);
-    }
-
-    private void initLogger() {
-        String logger = properties.getProperty("Logger", "");
-
     }
 }

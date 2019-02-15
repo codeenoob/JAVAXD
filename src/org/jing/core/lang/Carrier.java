@@ -1,9 +1,5 @@
 package org.jing.core.lang;
 
-import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.io.OutputFormat;
@@ -11,12 +7,17 @@ import org.dom4j.io.XMLWriter;
 import org.jing.core.util.CarrierUtil;
 import org.jing.core.util.GenericUtil;
 
+import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Description: A Special HashMap. <br>
  *
  * @author: lxd <br>
  * @createDate 2019-01-10 17:11:02 <br>
  */
+@SuppressWarnings({ "WeakerAccess", "unused", "unchecked" })
 public class Carrier {
     /**
      * Description: Value Map. <br>

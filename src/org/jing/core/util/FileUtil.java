@@ -152,7 +152,7 @@ public class FileUtil {
                     is = classLoader$.getResourceAsStream(filePath);
                     if (null == is) {
                         is = classLoader$.getResourceAsStream(
-                            new StringBuilder(Const.SYSTEM_FILE_SEPERATOR).append(filePath).toString());
+                            new StringBuilder(Const.SYSTEM_FILE_SEPARATOR).append(filePath).toString());
                     }
                     if (null != is) {
                         StringBuilder stbr$ = new StringBuilder();

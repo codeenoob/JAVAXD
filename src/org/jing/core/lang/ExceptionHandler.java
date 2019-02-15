@@ -3,6 +3,7 @@ package org.jing.core.lang;
 import org.apache.log4j.Logger;
 import org.jing.core.util.StringUtil;
 
+@SuppressWarnings("unused")
 public class ExceptionHandler {
     private static Logger logger = Logger.getLogger(ExceptionHandler.class);
 
