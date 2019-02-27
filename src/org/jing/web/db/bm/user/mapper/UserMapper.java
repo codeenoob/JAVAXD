@@ -10,7 +10,6 @@ import org.jing.core.db.SqlDateTime2JavaStringTypeHandler;
 import org.jing.web.db.bm.user.domain.UserDMO;
 import org.jing.web.db.bm.user.dto.UserDto;
 
-import java.util.HashMap;
 import java.util.List;
 
 public interface UserMapper {
@@ -30,4 +29,13 @@ public interface UserMapper {
     @Insert("INSERT INTO TEMP_TEST (T_STRING, T_DATE) "
         + "VALUES (#{string}, #{date, typeHandler = org.jing.core.db.SqlDateTime2JavaStringTypeHandler})")
     void saveTemp(@Param("string") String tString, @Param("date") String tDate);
+
+    @Select("SELECT * FROM BM_USER T WHERE T.ID = #{id}")
+    @Results(id= "qryUserById", value = {
+        @Result(property = "crtDate", column = "CRT_DATE", typeHandler = SqlDateTime2JavaStringTypeHandler.class),
+        @Result(property = "lastLoginDate", column = "LAST_LOGIN_DATE", typeHandler = SqlDateTime2JavaStringTypeHandler.class),
+        @Result(property = "lastLogoutDate", column = "LAST_LOGOUT_DATE", typeHandler = SqlDateTime2JavaStringTypeHandler.class),
+        @Result(property = "lastOperDate", column = "LAST_OPER_DATE", typeHandler = SqlDateTime2JavaStringTypeHandler.class)
+    })
+    UserDto qryUserById(@Param("id") String id);
 }

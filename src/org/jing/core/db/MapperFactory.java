@@ -13,6 +13,10 @@ import org.jing.core.lang.JingException;
  */
 @SuppressWarnings({"WeakerAccess", "unchecked"})
 public class MapperFactory {
+    public static void registerMapper(Class<?> mapper) throws JingException {
+        SessionFactory.getInstance().registerMapper(mapper);
+    }
+
     /**
      * Description:  <br>
      *     为传入的session创建一个映射关系. <br>

@@ -22,4 +22,8 @@ public class User {
     public void saveUser(UserDto user) throws JingException {
         MapperFactory.getMapper(UserMapper.class).saveUser(user);
     }
+
+    public UserDto qryUserById(String id) throws JingException {
+        return MapperFactory.getMapper(UserMapper.class).qryUserById(id);
+    }
 }

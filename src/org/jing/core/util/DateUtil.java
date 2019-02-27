@@ -39,11 +39,17 @@ public class DateUtil {
     }
 
     public static String getDateString(Date date, String dateFormat) {
+        if (null == date) {
+            return "";
+        }
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
         return sdf.format(date);
     }
 
     public static String getSqlDateString(java.sql.Date date, String dateFormat) {
+        if (null == date) {
+            return "";
+        }
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
         return sdf.format(date);
     }

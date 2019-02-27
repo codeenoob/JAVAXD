@@ -35,6 +35,10 @@ public class ItemDto {
 
     private UserDto crtUser;
 
+    private String modDate;
+
+    private UserDto modUser;
+
     public int getId() {
         return id;
     }
@@ -137,5 +141,21 @@ public class ItemDto {
 
     public void setCrtUser(UserDto crtUser) {
         this.crtUser = crtUser;
+    }
+
+    public String getModDate() {
+        return modDate;
+    }
+
+    public void setModDate(String modDate) {
+        this.modDate = modDate;
+    }
+
+    public UserDto getModUser() {
+        return modUser;
+    }
+
+    public void setModUser(UserDto modUser) {
+        this.modUser = modUser;
     }
 }

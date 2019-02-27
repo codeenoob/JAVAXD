@@ -18,15 +18,8 @@ public class UserDemo {
     static Logger logger = Logger.getLogger(UserDemo.class);
 
     private UserDemo() throws Exception {
-        Initialization.getInstance();
-        UserDto user = new UserDto();
-        user.setAccount("ADMINSsS");
-        user.setPassword("");
-        user.setName("adminssS");
-        user.setRole(-1);
-        user.setSex(-1);
-        User.api().saveUser(user);
-
+        UserDto user = User.api().qryUserById("34");
+        System.out.println(user.getName());
         SessionFactory.getInstance().closeSession();
     }
 

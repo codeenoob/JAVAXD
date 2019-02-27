@@ -1,6 +1,7 @@
 package org.jing.core.db;
 
 import org.jing.core.lang.ExceptionHandler;
+import org.jing.core.lang.annotation.RegisterMapper;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -26,6 +27,15 @@ public class MapperInvocation implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         try {
+            // 假如Mapper的方法上有@RegisterMapper注解, 则意味着需要先行注册其他Mapper.
+            RegisterMapper registerMapper = method.getAnnotation(RegisterMapper.class);
+            if (null != registerMapper) {
+                Class<?>[] registerMappers = registerMapper.value();
+                int count = null == registerMappers ? 0 : registerMappers.length;
+                for (int i$ = 0; i$ < count; i$++) {
+                    MapperFactory.registerMapper(registerMappers[i$]);
+                }
+            }
             return method.invoke(target, args);
         }
         catch (Throwable t) {

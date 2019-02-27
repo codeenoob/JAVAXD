@@ -2,7 +2,7 @@ package org.jing.core.lang;
 
 import org.apache.log4j.Logger;
 
-import java.util.HashMap;
+import java.util.Hashtable;
 
 /**
  * Description: <br>
@@ -17,7 +17,7 @@ public class InitFactory {
     /**
      * 存储继承了JInit接口的类和对应实例的map. <br>
      */
-    private static final HashMap<Class<? extends JInit>, JInit> jInitMap = new HashMap<>();
+    private static final Hashtable<Class<? extends JInit>, JInit> jInitMap = new Hashtable<>();
 
     /**
      * Description:  <br>
