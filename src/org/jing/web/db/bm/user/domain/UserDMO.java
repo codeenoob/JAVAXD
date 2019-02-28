@@ -3,9 +3,11 @@ package org.jing.web.db.bm.user.domain;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
 import org.jing.core.lang.Const;
+import org.jing.core.lang.ExceptionHandler;
 import org.jing.core.lang.JingException;
 import org.jing.core.util.DateUtil;
 import org.jing.core.util.StringUtil;
+import org.jing.web.db.bm.user.dto.ModifyUserDto;
 import org.jing.web.db.bm.user.dto.UserDto;
 import org.jing.web.db.util.api.CommonUtil;
 
@@ -15,6 +17,7 @@ import org.jing.web.db.util.api.CommonUtil;
  * @author: bks <br>
  * @createDate: 2019-01-25 <br>
  */
+@SuppressWarnings("ALL")
 public class UserDMO {
     public String saveUser(@Param("user") UserDto user) throws JingException {
         SQL sql = new SQL(){{
@@ -37,6 +40,46 @@ public class UserDMO {
             }
             if (StringUtil.isEmpty(user.getState())) {
                 user.setState(Const.STATE_INACTIVE);
+            }
+        }};
+        return sql.toString();
+    }
+
+    public String modifyUser(@Param("user")ModifyUserDto userDto) throws JingException {
+        if (-2 == userDto.getId() && StringUtil.isEmpty(userDto.getAccount())) {
+            ExceptionHandler.publish("USER-0000", "Failed to update a user without ID or Account.");
+        }
+        SQL sql = new SQL(){{
+            UPDATE("BM_USER");
+            if (StringUtil.isNotEmpty(userDto.getName())) {
+                SET("NAME = #{name}");
+            }
+            if (StringUtil.isNotEmpty(userDto.getPassword())) {
+                SET("PASSWORD = #{password}");
+            }
+            if (-2 != userDto.getRole()) {
+                SET("ROLE = #{role}");
+            }
+            if (-2 != userDto.getSex()) {
+                SET("SEX = #{sex}");
+            }
+            if (StringUtil.isNotEmpty(userDto.getLastLoginDate())) {
+                SET("LAST_LOGIN_DATE = #{lastLoginDate, typeHandler = org.jing.core.db.SqlDateTime2JavaStringTypeHandler}");
+            }
+            if (StringUtil.isNotEmpty(userDto.getLastLogoutDate())) {
+                SET("LAST_LOGOUT_DATE = #{lastLogoutDate, typeHandler = org.jing.core.db.SqlDateTime2JavaStringTypeHandler}");
+            }
+            if (StringUtil.isNotEmpty(userDto.getLastOperDate())) {
+                SET("LAST_OPER_DATE = #{lastOperDate, typeHandler = org.jing.core.db.SqlDateTime2JavaStringTypeHandler}");
+            }
+            if (StringUtil.isNotEmpty(userDto.getState())) {
+                SET("STATE = #{state}");
+            }
+            if (-2 != userDto.getId()) {
+                WHERE("ID = #{id}");
+            }
+            else if (StringUtil.isNotEmpty(userDto.getAccount())) {
+                WHERE("ACCOUNT = #{account}");
             }
         }};
         return sql.toString();
