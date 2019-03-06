@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <script type="text/javascript" src="lib/third-party/jquery.js"></script>
+</head>
+<body>
+    <p>test</p>
+    <button id="btn">testBtn</button>
+    <script type="text/javascript" defer>
+        $("#btn").click(function () {
+            $.ajax({
+                type : "post",
+                url : "hello.do",
+                data : {"msg": "test input"},
+                cache : false,
+                success : function(data){
+                    console.log("success");
+                    console.log(data);
+                },
+                error : function(data) {
+                    console.log("error");
+                    console.log(data);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
