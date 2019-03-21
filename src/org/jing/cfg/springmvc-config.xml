@@ -5,7 +5,8 @@
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd">
-	 <bean name="/hello.do" class="test.demo2.HelloController" />
+	 <!--<bean name="/hello.do" class="test.demo2.HelloController" />-->
+	<context:component-scan base-package="org.jing.web.springmvc.controller" />
 	<!-- 注解处理映射器 -->
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
 	<!-- 注解处理适配器 -->
@@ -15,5 +16,12 @@
 	<!-- 处理适配器 -->
 	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
 	<!-- 视图解析器 -->
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" />
+	<bean id ="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
+		<property name="prefix">
+			<value>/</value>
+		</property>
+		<property name="suffix">
+			<value>.html</value>
+		</property>
+	</bean>
 </beans>

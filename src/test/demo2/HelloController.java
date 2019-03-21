@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author: bks <br>
  * @createDate: 2019-03-06 <br>
  */
+@Deprecated
 public class HelloController implements Controller {
 
     private static Logger logger = Logger.getLogger(HelloController.class);

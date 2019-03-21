@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jing>
+    <service>org.jing</service>
+    <service>test.demo2</service>
+</jing>

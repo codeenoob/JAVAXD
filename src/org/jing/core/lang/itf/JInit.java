@@ -1,4 +1,6 @@
-package org.jing.core.lang;
+package org.jing.core.lang.itf;
+
+import org.jing.core.lang.JingException;
 
 /**
  * Description: <br>

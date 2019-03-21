@@ -21,10 +21,6 @@ public class FileUtil {
      */
     private static volatile  Logger logger = null;
 
-    private static ClassLoader defaultClassLoader;
-
-    private static ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
-
     public static boolean log(boolean flag) {
         if (flag) {
             if (null == logger) {
@@ -137,13 +133,7 @@ public class FileUtil {
             logger.info(new StringBuilder("Try To Read File [filePath: ").append(filePath).append("]").toString());
         }
         try {
-            ClassLoader classLoader[] = new ClassLoader[] {
-                null,
-                defaultClassLoader,
-                Thread.currentThread().getContextClassLoader(),
-                FileUtil.class.getClassLoader(),
-                systemClassLoader
-            };
+            ClassLoader[] classLoader = ClassUtil.getClassLoader(FileUtil.class);
             int size = classLoader.length;
             for (int i$ = 0; i$ < size; i$++) {
                 ClassLoader classLoader$ = classLoader[i$];

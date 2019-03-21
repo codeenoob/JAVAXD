@@ -1,6 +1,7 @@
 package org.jing.core.lang;
 
 import org.apache.log4j.Logger;
+import org.jing.core.lang.itf.JInit;
 
 import java.util.Hashtable;
 
@@ -26,7 +27,7 @@ public class InitFactory {
      *
      * @author: bks <br>
      * @param type <br>
-     * @return org.jing.core.lang.JInit <br>
+     * @return org.jing.core.lang.itf.JInit <br>
      */
     @SuppressWarnings("SynchronizationOnLocalVariableOrMethodParameter")
     public static JInit register(Class<? extends JInit> type) {
@@ -56,7 +57,7 @@ public class InitFactory {
      *
      * @author: bks <br>
      * @param type <br>
-     * @return org.jing.core.lang.JInit <br>
+     * @return org.jing.core.lang.itf.JInit <br>
      */
     public static JInit getInstance(Class<? extends JInit> type) {
         if (!jInitMap.containsKey(type)) {

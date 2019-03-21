@@ -4,7 +4,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.spi.Filter;
 import org.apache.log4j.spi.LoggingEvent;
 import org.jing.core.lang.Configuration;
-import org.jing.core.lang.JInit;
+import org.jing.core.lang.itf.JInit;
 import org.jing.core.lang.annotation.Property;
 import org.jing.core.util.GenericUtil;
 

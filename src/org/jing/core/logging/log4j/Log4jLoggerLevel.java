@@ -1,12 +1,7 @@
 package org.jing.core.logging.log4j;
 
 import org.apache.log4j.Level;
-import org.jing.core.lang.Configuration;
-import org.jing.core.lang.JInit;
-import org.jing.core.util.GenericUtil;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.HashSet;
 

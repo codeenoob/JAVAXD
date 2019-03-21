@@ -29,7 +29,7 @@ public class Demo1 {
         UserMapper mapper = MapperFactory.getMapper(UserMapper.class);
         // List<UserDto> list = mapper.selectTry("A");
         // System.out.println(list);
-        mapper.saveTemp("123", "2018-01-01 21:42:43");
+        mapper.saveTemp("1233", "2018-01-01 21:42:43");
         SessionFactory.getInstance().closeSession();
         /*
         BufferedReader br = new BufferedReader(reader);

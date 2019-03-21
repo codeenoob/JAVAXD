@@ -8,7 +8,7 @@ import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.spi.Filter;
 import org.jing.core.lang.Configuration;
 import org.jing.core.lang.InitFactory;
-import org.jing.core.lang.JInit;
+import org.jing.core.lang.itf.JInit;
 import org.jing.core.lang.JingException;
 import org.jing.core.logging.log4j.Log4jLoggerLevel;
 import org.jing.core.util.FileUtil;

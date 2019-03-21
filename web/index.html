@@ -10,14 +10,22 @@
     <button id="btn">testBtn</button>
     <script type="text/javascript" defer>
         $("#btn").click(function () {
+            let obj = {};
+            obj.msg = "test input";
+            obj.tempObj = {};
+            obj.tempObj.msg = "test tempObj input";
+            console.log(JSON.stringify(obj));
             $.ajax({
+                dataType: "json",
                 type : "post",
-                url : "hello.do",
-                data : {"msg": "test input"},
+                contentType: "application/json",
+                url : "api/callService/TRY_CALL_SERVICE",
+                data : JSON.stringify(obj),
                 cache : false,
                 success : function(data){
                     console.log("success");
                     console.log(data);
+                    $("html").html(data);
                 },
                 error : function(data) {
                     console.log("error");
